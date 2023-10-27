@@ -32,7 +32,7 @@ class IrHandler extends AbstractHandler
 
         return [
             'regrinfo' => static::generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd'),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer' => 'http://whois.nic.ir/',
                 'registrar' => 'NIC-IR'
             ],

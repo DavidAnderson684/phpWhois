@@ -17,7 +17,7 @@ class XxxHandler extends AbstractHandler
     {
         $r = [
             'regrinfo' => static::generic_parser_b($data_str['rawdata']),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer' => 'https://www.pir.org/',
                 'registrar' => 'Public Interest Registry'
             ],

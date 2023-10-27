@@ -18,10 +18,14 @@ class IntHandler extends AbstractHandler
     public function parse(array $data_str, string $query): array
     {
         $iana = new iana_handler();
-        $r = array();
-        $r['regrinfo'] = $iana->parse($data_str['rawdata'], $query);
-        $r['regyinfo']['referrer'] = 'http://www.iana.org/int-dom/int.htm';
-        $r['regyinfo']['registrar'] = 'Internet Assigned Numbers Authority';
-        return $r;
+
+        return [
+            'rawdata' => $data_str['rawdata'],
+            'regrinfo' => $iana->parse($data_str['rawdata'], $query),
+            'regyinfo' => [
+                'referrer' => 'http://www.iana.org/int-dom/int.htm',
+                'registrar' => 'Internet Assigned Numbers Authority',
+            ],
+        ];
     }
 }

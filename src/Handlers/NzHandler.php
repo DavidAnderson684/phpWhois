@@ -71,7 +71,7 @@ class NzHandler extends AbstractHandler
             $r['regrinfo']['registered']='unknown';
         }
 
-        $r['regyinfo'] = $this->parseRegistryInfo($data_str['rawdata']) ?? [
+        $r['regyinfo'] = $this->parseRegistryInfo($data_str['rawdata']) ?: [
             'referrer' => 'https://www.dnc.org.nz',
             'registrar' => 'New Zealand Domain Name Registry Limited'
         ];

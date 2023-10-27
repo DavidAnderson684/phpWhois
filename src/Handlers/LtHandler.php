@@ -35,7 +35,7 @@ class LtHandler extends AbstractHandler
 
         return [
             'regrinfo' => static::easyParser($data_str['rawdata'], $items, 'ymd', $translate),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'registrar' => 'DOMREG.LT',
                 'referrer' => 'https://www.domreg.lt'
             ],

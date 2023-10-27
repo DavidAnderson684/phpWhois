@@ -20,7 +20,11 @@ class ItHandler extends AbstractHandler
 {
     public function parse(array $data_str, string $query): array
     {
-        $items = array(
+        print_r([
+            'ItHandlerItHandlerItHandlerItHandlerItHandler' => 'ItHandlerItHandlerItHandlerItHandler',
+        ]);
+
+        $items = [
             'domain.name' => 'Domain:',
             'domain.nserver' => 'Nameservers',
             'domain.status' => 'Status:',
@@ -29,24 +33,24 @@ class ItHandler extends AbstractHandler
             'admin' => 'Admin Contact',
             'tech' => 'Technical Contacts',
             'registrar' => 'Registrar'
-        );
+        ];
 
-        $extra = array(
+        $extra = [
             'address:' => 'address.',
             'contactid:' => 'handle',
             'organization:' => 'organization',
             'created:' => 'created',
             'last update:' => 'changed',
             'web:' => 'web'
-        );
+        ];
 
         $r = [
-            'regrinfo' => static::easyParser($data_str['rawdata'], $items, 'ymd', $extra),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'rawdata' => $data_str['rawdata'],
+            'regrinfo' => static::easyParser($data_str['rawdata'], $items, 'Y-m-d H:i:s', $extra),
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'registrar' => 'IT-Nic',
                 'referrer' => 'https://www.nic.it/'
             ],
-            'rawdata' => $data_str['rawdata'],
         ];
 
         if (isset($r['regrinfo']['registrar'])) {

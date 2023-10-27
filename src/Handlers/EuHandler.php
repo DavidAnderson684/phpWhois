@@ -33,7 +33,7 @@ class EuHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer'  => 'https://www.eurid.eu',
                 'registrar' => 'EURID',
             ],

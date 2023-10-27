@@ -62,7 +62,7 @@ class DkHandler extends AbstractHandler
 
         return [
             'regrinfo' => $reg,
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer' => 'https://www.dk-hostmaster.dk/',
                 'registrar' => 'DK Hostmaster'
             ],

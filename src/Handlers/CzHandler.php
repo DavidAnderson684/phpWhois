@@ -38,7 +38,7 @@ class CzHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::generic_parser_a($data_str['rawdata'], $translate, $contacts),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer'  => 'https://www.nic.cz',
                 'registrar' => 'CZ-NIC',
             ],

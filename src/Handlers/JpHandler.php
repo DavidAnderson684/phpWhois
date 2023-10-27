@@ -37,21 +37,20 @@ class JpHandler extends WhoisClient
             '[Name Server]' => 'domain.nserver.'
         );
 
-        $r = array();
-        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
-
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.jprs.jp',
-            'registrar' => 'Japan Registry Services'
-        );
+        $r = [
+            'rawdata' => $data_str['rawdata'],
+            'regrinfo' => AbstractHandler::generic_parser_b($data_str['rawdata'], $items, 'ymd'),
+            'regyinfo' => [
+                'referrer' => 'https://www.jprs.jp',
+                'registrar' => 'Japan Registry Services'
+            ],
+        ];
 
         if (!$this->deepWhois) {
             return $r;
         }
 
-        $r['rawdata'] = $data_str['rawdata'];
-
-        $items = array(
+        $items = [
             'a. [JPNIC Handle]' => 'handle',
             'c. [Last, First]' => 'name',
             'd. [E-Mail]' => 'email',
@@ -59,7 +58,7 @@ class JpHandler extends WhoisClient
             'o. [TEL]' => 'phone',
             'p. [FAX]' => 'fax',
             '[Last Update]' => 'changed'
-        );
+        ];
 
         $this->query['server'] = 'jp.whois-servers.net';
 
@@ -67,15 +66,12 @@ class JpHandler extends WhoisClient
             $rwdata = $this->getRawData('CONTACT ' . $r['regrinfo']['admin']['handle'] . '/e');
             $r['rawdata'][] = '';
             $r['rawdata'] = array_merge($r['rawdata'], $rwdata);
-            $r['regrinfo']['admin'] = generic_parser_b($rwdata, $items, 'ymd', false);
+            $r['regrinfo']['admin'] = AbstractHandler::generic_parser_b($rwdata, $items, 'ymd', false);
             $r = $this->setWhoisInfo($r);
         }
 
         if (!empty($r['regrinfo']['tech']['handle'])) {
-            if (
-                !empty($r['regrinfo']['admin']['handle']) &&
-                    $r['regrinfo']['admin']['handle'] == $r['regrinfo']['tech']['handle']
-            ) {
+            if ( !empty($r['regrinfo']['admin']['handle']) && $r['regrinfo']['admin']['handle'] === $r['regrinfo']['tech']['handle'] ) {
                 $r['regrinfo']['tech'] = $r['regrinfo']['admin'];
             } else {
                 unset($this->query);
@@ -83,7 +79,7 @@ class JpHandler extends WhoisClient
                 $rwdata = $this->getRawData('CONTACT ' . $r['regrinfo']['tech']['handle'] . '/e');
                 $r['rawdata'][] = '';
                 $r['rawdata'] = array_merge($r['rawdata'], $rwdata);
-                $r['regrinfo']['tech'] = generic_parser_b($rwdata, $items, 'ymd', false);
+                $r['regrinfo']['tech'] = AbstractHandler::generic_parser_b($rwdata, $items, 'ymd', false);
                 $r = $this->setWhoisInfo($r);
             }
         }

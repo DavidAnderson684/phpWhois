@@ -25,7 +25,7 @@ class BhHandler extends AbstractHandler
             $r['regrinfo']['registered'] = 'yes';
         }
 
-        $r['regyinfo'] = $this->parseRegistryInfo($data_str['rawdata']) ?? [
+        $r['regyinfo'] = $this->parseRegistryInfo($data_str['rawdata']) ?: [
             'referrer'  => 'http://www.nic.bh/',
             'registrar' => 'NIC-BH',
         ];

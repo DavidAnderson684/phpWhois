@@ -40,7 +40,7 @@ class IsHandler extends AbstractHandler
 
         return [
             'regrinfo' => $reg,
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer' => 'https://www.isnic.is',
                 'registrar' => 'ISNIC'
             ]

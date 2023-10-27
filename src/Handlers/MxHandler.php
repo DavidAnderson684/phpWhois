@@ -35,7 +35,7 @@ class MxHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::easyParser($data_str['rawdata'], $items, 'dmy', $extra),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'registrar' => 'NIC Mexico',
                 'referrer' => 'https://www.nic.mx/'
             ],

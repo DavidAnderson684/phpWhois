@@ -39,7 +39,7 @@ class UkHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::getBlocks($rawData, static::ITEMS),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer'  => 'https://www.nominet.org.uk',
                 'registrar' => 'Nominet UK',
             ],

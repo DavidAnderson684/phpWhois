@@ -66,7 +66,7 @@ class RoHandler extends AbstractHandler
 
         return [
             'regrinfo' => $reg,
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer' => 'https://www.nic.ro',
                 'registrar' => 'nic.ro'
             ],

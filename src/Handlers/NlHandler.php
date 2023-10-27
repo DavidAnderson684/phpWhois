@@ -28,7 +28,7 @@ class NlHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer'  => 'https://www.domain-registry.nl',
                 'registrar' => 'Stichting Internet Domeinregistratie NL',
             ],

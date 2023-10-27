@@ -30,7 +30,7 @@ class VeHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::getBlocks($data_str['rawdata'], $items),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer' => 'https://registro.nic.ve',
                 'registrar' => 'NIC-Venezuela - CNTI'
             ],

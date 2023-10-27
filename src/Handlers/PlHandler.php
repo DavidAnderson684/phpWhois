@@ -24,7 +24,7 @@ class PlHandler extends AbstractHandler
 
         return [
             'regrinfo' => static::easyParser($data_str['rawdata'], $items, 'ymd'),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'referrer' => 'https://www.dns.pl/english/index.html',
                 'registrar' => 'NASK'
             ],

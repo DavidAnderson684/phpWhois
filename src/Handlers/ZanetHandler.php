@@ -45,7 +45,7 @@ class ZanetHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => static::getBlocks($rawdata, $items),
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 // Or try http://www.za.org
                 'referrer'  => 'https://www.za.net/',
                 'registrar' => 'ZA NiC',

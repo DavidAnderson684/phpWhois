@@ -26,7 +26,7 @@ class NuHandler extends AbstractHandler
 
         $r = [
             'regrinfo' => [],
-            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?? [
+            'regyinfo' => $this->parseRegistryInfo($data_str['rawdata']) ?: [
                 'whois' => 'whois.nic.nu',
                 'referrer' => 'http://www.nunames.nu',
                 'registrar' => '.NU Domain, Ltd'
