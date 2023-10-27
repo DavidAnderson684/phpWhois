@@ -18,11 +18,16 @@ require_once __DIR__ . '/../whois.parser.php';
  */
 abstract class AbstractHandler implements HandlerInterface
 {
-    public $deepWhois;
+    /**
+     * @var bool Perform a "deep whois request", but will be slower
+     * @deprecated
+    */
+    public $deepWhois = false;
 
     /**
      * @param string[] $lines
      * @return string[]
+     * @deprecated
      */
     protected function removeBlankLines(array $lines): array
     {
@@ -38,6 +43,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param bool $partial_match
      * @param bool $def_block
      * @return mixed
+     * @deprecated
      */
     public static function easyParser( array $data_str, array $items, string $date_format, array $translate = [], bool $has_org=false, bool $partial_match=false, bool $def_block=false ){
         $r = static::getBlocks($data_str, $items, $partial_match, $def_block);
@@ -50,6 +56,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param mixed  $res
      * @param string $format
      * @return array
+     * @deprecated
      */
     public static function formatDates(&$res, string $format='mdy'): array
     {
@@ -88,6 +95,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param  string $main
      * @param  string $dateformat
      * @return array
+     * @deprecated
      */
     public static function generic_parser_a(array $rawdata, array $translate, array $contacts, string $main='domain', string $dateformat='dmy'): array
     {
@@ -136,6 +144,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param array $translate
      * @param array|null $disclaimer
      * @return array
+     * @deprecated
      */
     public static function generic_parser_a_blocks(array $rawdata, array $translate, array &$disclaimer=[]): array
     {
@@ -219,6 +228,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param bool $hasreg
      * @param bool $scanall
      * @return array
+     * @deprecated
      */
     public static function generic_parser_b( array $rawdata, array $items=[], string $dateformat='mdy', bool $hasreg=true, bool $scanall=false): array
     {
@@ -468,6 +478,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param bool  $partial_match
      * @param bool  $def_block
      * @return array
+     * @deprecated
      */
     public static function getBlocks( array $rawdata, array $items, bool $partial_match=false, bool $def_block=false ): array
     {
@@ -475,6 +486,11 @@ abstract class AbstractHandler implements HandlerInterface
         $endtag = '';
 
         while ($val = current($rawdata)) {
+
+            print_r([
+                '$val' => $val,
+                'next($rawdata)' => next($rawdata),
+            ]);
 
             if( next($rawdata) === false ){
                 // No more data
@@ -585,8 +601,8 @@ abstract class AbstractHandler implements HandlerInterface
      * @param       $array
      * @param array $extra_items
      * @param bool  $has_org
-     *
      * @return mixed
+     * @deprecated
      */
     public static function getContacts($array, array $extra_items=[], bool $has_org=false)
     {
@@ -622,6 +638,7 @@ abstract class AbstractHandler implements HandlerInterface
      * @param array $extra_items
      * @param bool  $has_org
      * @return array
+     * @deprecated
      */
     public static function getContact($array, array $extra_items=[], bool $has_org=false): array
     {
@@ -775,8 +792,8 @@ abstract class AbstractHandler implements HandlerInterface
 
     /**
      * @param array $rawData
-     *
      * @return array
+     * @deprecated
      */
     protected function parseRegistryInfo(array $rawData): array
     {
@@ -798,8 +815,8 @@ abstract class AbstractHandler implements HandlerInterface
     /**
      * @param $date
      * @param $format
-     *
      * @return string|array
+     * @deprecated
      */
     public static function getDate($date, $format)
     {
@@ -912,8 +929,8 @@ abstract class AbstractHandler implements HandlerInterface
 
     /**
      * @param string $date
-     *
      * @return false|DateTime
+     * @deprecated
      */
     public static function parseStandardDate(string $date)
     {
