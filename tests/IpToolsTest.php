@@ -12,16 +12,16 @@ class IpToolsTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidIp($ip)
     {
-        $ipTools = new IpTools;
+        $ipTools = new IpTools();
         $this->assertTrue($ipTools->validIp($ip));
     }
 
-    public function validIpsProvider()
+    public static function validIpsProvider()
     {
-        return array(
-            array('123.123.123.123'),
-            array('1a80:1f45::ebb:12'),
-        );
+        return [
+            ['123.123.123.123'],
+            ['1a80:1f45::ebb:12'],
+        ];
     }
 
     /**
@@ -33,17 +33,17 @@ class IpToolsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($ipTools->validIp($ip));
     }
 
-    public function invalidIpsProvider()
+    public static function invalidIpsProvider()
     {
-        return array(
-            array(''),
-            array('169.254.255.200'),
-            array('172.17.255.100'),
-            array('123.a15.255.100'),
-            array('fd80::1'),
-            array('fc80:19c::1'),
-            array('1a80:1f45::ebm:12'),
-            array('[1a80:1f45::ebb:12]'),
-        );
+        return [
+            [''],
+            ['169.254.255.200'],
+            ['172.17.255.100'],
+            ['123.a15.255.100'],
+            ['fd80::1'],
+            ['fc80:19c::1'],
+            ['1a80:1f45::ebm:12'],
+            ['[1a80:1f45::ebb:12]'],
+        ];
     }
 }
